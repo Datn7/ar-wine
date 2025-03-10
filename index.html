@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D QR Model Viewer</title>
+    <title>3D Model Viewer</title>
     <style>
       body {
         margin: 0;
@@ -12,20 +12,13 @@
       canvas {
         display: block;
       }
-      #qrcode {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: white;
-        padding: 10px;
-      }
     </style>
   </head>
   <body>
     <script type="module">
       import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js";
-      import { GLTFLoader } from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/loaders/GLTFLoader.js";
-      import { ARButton } from "https://cdn.jsdelivr.net/npm/three@0.128/examples/jsm/webxr/ARButton.js";
+      import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js";
+      import { ARButton } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/webxr/ARButton.js";
 
       // Scene Setup
       const scene = new THREE.Scene();
@@ -49,7 +42,7 @@
 
       // AR Button
       const arButton = ARButton.createButton(renderer, {
-        requiredFeatures: ["hit-test"], // ✅ Ensures hit-testing is enabled
+        requiredFeatures: ["hit-test"], // Ensures hit-testing is enabled
       });
       document.body.appendChild(arButton);
 
@@ -89,7 +82,7 @@
         hitTestSource = hitTestSourceRequest;
         hitTestSourceRequested = true;
 
-        reticle.visible = true; // ✅ Show reticle when AR starts
+        reticle.visible = true; // Show reticle when AR starts
       });
 
       // AR Animation Loop
@@ -123,18 +116,6 @@
           newModel.position.copy(reticle.position);
           scene.add(newModel);
         }
-      });
-    </script>
-
-    <!-- QR Code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <div id="qrcode"></div>
-    <script>
-      const url = "http://192.168.31.61:3000"; // Replace with your actual local IP
-      new QRCode(document.getElementById("qrcode"), {
-        text: url,
-        width: 128,
-        height: 128,
       });
     </script>
   </body>
